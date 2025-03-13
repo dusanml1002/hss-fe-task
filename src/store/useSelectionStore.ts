@@ -6,7 +6,7 @@ interface StoreState {
     clearSelection: () => void;
 }
 
-export const useStore = create<StoreState>((set) => ({
+export const useSelectionStore = create<StoreState>((set) => ({
     selectedIds: [],
     toggleSelection: (id: number) => {
         set((state: StoreState) => ({

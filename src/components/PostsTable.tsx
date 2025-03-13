@@ -1,3 +1,6 @@
+import * as React from "react";
+
+
 interface PostsTableProps {
     posts: {id: number; title: string; body: string}[];
     selectedIds: number[];
@@ -17,7 +20,7 @@ const PostsTable: React.FC<PostsTableProps> = ({posts, selectedIds, toggleSelect
         </thead>
         <tbody>
         {posts?.map((post) => (
-            <tr key={post.id} className="odd:bg-gray-100">
+            <tr key={post.id} className="odd:bg-gray-100 even:bg-gray-300">
                 <td className={"border-gray-300 p-2"}>
                     <input
                         type={"checkbox"}
