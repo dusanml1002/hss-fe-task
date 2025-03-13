@@ -6,12 +6,23 @@ import {Post} from "./types.ts";
 import {useState} from "react";
 import AddPostModal from "./components/AddPostModal.tsx";
 import {useModalStore} from "./store/useModalStore.ts";
+import {useQueryClient} from "@tanstack/react-query";
 
 function App() {
     const {data: posts, isLoading, error} = usePosts()
-    const {selectedIds, toggleSelection, clearSelection, removeSelected} = useSelectionStore();
+    const {selectedIds, toggleSelection, clearSelection} = useSelectionStore();
     const [localPosts, setLocalPosts] = useState<Post[]>([]);
     const { openModal } = useModalStore();
+
+    const queryClient = useQueryClient();
+
+    const removeSelected = () => {
+        setLocalPosts(localPosts => localPosts.filter(post => !selectedIds.includes(post.id)));
+        queryClient.setQueryData<Post[]>(["posts"], (queryPosts) =>
+            queryPosts ? queryPosts.filter((post) => !selectedIds.includes(post.id)) : []
+        );
+        clearSelection();
+    }
 
     const addPost = (post: Omit<Post, "id">) => {
         const lastId = allPosts.length > 0 ? Math.max(...allPosts.map(post => post.id)) : 0;
