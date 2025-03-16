@@ -9,7 +9,7 @@ interface PostsTableProps {
 
 const PostsTable: React.FC<PostsTableProps> = ({posts, selectedIds, toggleSelection}) => {
 
-    return <table className={"w-full border-collapse border border-gray-300"}>
+    return <table className={"w-full border-collapse border border-pastel-gray shadow-md rounded-lg overflow-hidden"}>
         <thead>
         <tr className={"bg-gray-200"}>
             <th className={"border-gray-300 p-2"}>Select</th>
